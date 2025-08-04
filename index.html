@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mechanography for Developers</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="js/tailwind-config.js"></script>
+    <script type="module" src="js/form.js" defer></script>
+  </head>
+  <body class="bg-background text-white font-mono">
+    <!-- Navbar -->
+    <nav class="bg-surface shadow-md">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="flex justify-between items-center h-16 relative">
+          <!-- Home -->
+          <div class="absolute left-0">
+            <a href="#" class="text-sm text-gray-300 hover:text-white font-medium">Home</a>
+          </div>
+
+          <!-- Title -->
+          <div class="mx-auto">
+            <h1 class="text-lg font-bold text-gray-100">Mechanography for Developers</h1>
+          </div>
+
+          <!-- Links -->
+          <div class="absolute right-0 space-x-4 text-sm">
+            <a
+              href="https://github.com/SergioGMunoz"
+              target="_blank"
+              class="text-gray-300 hover:text-white font-medium"
+              >GitHub</a
+            >
+            <a
+              href="https://www.linkedin.com/in/sergiogonzalezmu%C3%B1oz/"
+              target="_blank"
+              class="text-gray-300 hover:text-white font-medium"
+              >LinkedIn</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="min-h-screen flex flex-col items-center justify-center px-4 py-12">
+      <div class="w-full max-w-4xl bg-surface rounded-xl shadow-lg p-10 border border-gray-700">
+          <p class="text-center text-gray-400 mb-6 text-base">
+            This is a personal practice project. 
+          </p>
+          <p class="text-center text-gray-400 mb-6 text-base">
+            You can import your own code and practice typing with it.
+          </p>
+
+        <form name="codeForm"class="space-y-6">
+          <textarea
+            id="codeInput"
+            name="codeInput"
+            rows="20"
+            placeholder="Paste your code here..."
+            class="w-full p-4 bg-black text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent font-mono text-sm resize-none"
+          ></textarea>
+
+         <button
+            name="btnSubmit"
+            type="submit"
+            disabled
+            class="w-full bg-accent text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 disabled:opacity-50"
+            >
+            Start Practice
+        </button>
+
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
