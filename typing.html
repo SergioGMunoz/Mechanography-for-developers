@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Typing Practice | Mechanography for Developers</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="js/tailwind-config.js"></script>
+    <script type="module" src="js/typing.js" defer></script>
+
+  </head>
+  <body class="bg-background text-white font-mono overflow-hidden">
+    <!-- Navbar -->
+    <nav class="bg-surface shadow-md">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="flex justify-between items-center h-16 relative">
+          <!-- Left: Home -->
+          <div class="absolute left-0">
+            <a href="index.html" class="text-sm text-gray-300 hover:text-white font-medium">Home</a>
+          </div>
+          <!-- Center: Title -->
+          <div class="mx-auto">
+            <h1 class="text-lg font-bold text-gray-100">Mechanography for Developers</h1>
+          </div>
+          <!-- Right: Links -->
+          <div class="absolute right-0 space-x-4 text-sm">
+            <a href="https://github.com/your-username" target="_blank" class="text-gray-300 hover:text-white font-medium">GitHub</a>
+            <a href="https://linkedin.com/in/your-profile" target="_blank" class="text-gray-300 hover:text-white font-medium">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+   <!-- Typing Area -->
+<div class="h-screen flex flex-col items-center justify-center px-4">
+  <div
+    class="w-full max-w-5xl bg-surface rounded-2xl shadow-2xl p-12 border border-gray-700 flex flex-col"
+    style="height: 70vh;"
+  >
+    <div class="mb-6 text-center">
+      <h2 class="text-xl font-semibold text-gray-200">Typing Practice</h2>
+    </div>
+    <div
+    id="divText"
+      class="bg-black border border-gray-600 rounded-lg p-8 font-mono text-base text-gray overflow-auto flex-grow"
+      style="min-height: 400px;"
+    >
+    <p id="practiceText" class="">
+        <span id="textBefore"></span><span class="animate-blink inline-block">|</span><span
+            id="textAfter"></span>
+    </p>
+    </div>
+
+    <!-- Stats Menu -->
+    <div
+      id="statsMenu"
+      class="mt-6 flex justify-around text-gray-300 text-sm font-mono  pt-4 select-none"
+    >
+      <div>
+        Errors: <span id="errorsCount">0</span>
+      </div>
+      <div>
+        Words / Minute: <span id="wpmCount">0</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+  </body>
+</html>
