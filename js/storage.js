@@ -8,3 +8,11 @@ export const uploadToStorage = (text) => {
 export const loadFromStorage = () => {
   return localStorage.getItem('codeInput');
 };
+
+export const uploadStats = (text) => {
+  localStorage.setItem('stats', text);
+};
+
+export const loadStatsFromStorage = () => {
+  return localStorage.getItem('stats');
+};
