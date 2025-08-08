@@ -20,7 +20,7 @@ const checkBtnSubmit = () => {
 
 const goTyping = () => {
   uploadToStorage(getText());
-  window.location.href = '../typing.html';
+  window.location.href = './html/typing.html';
 };
 
 textField.addEventListener('keyup', checkBtnSubmit);
