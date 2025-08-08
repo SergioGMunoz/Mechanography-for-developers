@@ -1,18 +1,19 @@
 import { loadFromStorage } from "./storage.js";
 
-// Load text from storage and validate
 const text = loadFromStorage();
+let cursor = 0;
+console.log(text.lengthren)
+
+// Load text from storage and validate
 if (!text || text.trim() === "") {
   alert("Text not found, try again");
   window.location.href = "../index.html";
 }
 
-let cursorPosition = 0;
-
 // Load the text into de UI
 const renderText = () => {
-  const textBefore = text.substring(0, cursorPosition);
-  const textAfter = text.substring(cursorPosition);
+  const textBefore = text.substring(0, cursor);
+  const textAfter = text.substring(cursor);
 
   document.getElementById("textBefore").innerHTML = textBefore;
   document.getElementById("textAfter").innerHTML = textAfter;
@@ -20,7 +21,12 @@ const renderText = () => {
 
 // Returns if is the correct character
 const checkChar = (char) => {
-    return char === text[cursorPosition];
+    return char === text[cursor];
+}
+
+// Go to the finished page
+const finish = () =>{
+  window.location.href = './finished.html';
 }
 
 // Errors management
@@ -35,7 +41,6 @@ const error = () => {
 const changeBgColor = (succeed) => {
   const divText = document.getElementById('divText');
   if (succeed) {
-    console.log("Changin to black")
     divText.classList.remove('bg-red-900');
     divText.classList.add('bg-black');
   } else {
@@ -49,8 +54,14 @@ const renderErrors = () => errorsCount.innerHTML = errors;
 // Succeed management
 const succeed = () => {
   changeBgColor(true);
-  cursorPosition++;
+  cursor++;
   renderText();
+  
+  // Finished the text
+  if (cursor === text.length){
+    console.log('Win')
+    finish();
+  }
 }
 
 // Keyboard management 
