@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Practice Completed</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../js/tailwind-config.js"></script>
+    <script type="module" src="../js/finished.js" defer></script>
+  </head>
+  <body class="bg-background text-white font-mono">
+    <!-- Navbar -->
+    <nav class="bg-surface shadow-md">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="flex justify-between items-center h-16 relative">
+          <!-- Home -->
+          <div class="absolute left-0">
+            <a href="#" class="text-sm text-gray-300 hover:text-white font-medium">Home</a>
+          </div>
+
+          <!-- Title -->
+          <div class="mx-auto">
+            <h1 class="text-lg font-bold text-gray-100">Mechanography for Developers</h1>
+          </div>
+
+          <!-- Links -->
+          <div class="absolute right-0 space-x-4 text-sm">
+            <a
+              href="https://github.com/SergioGMunoz"
+              target="_blank"
+              class="text-gray-300 hover:text-white font-medium"
+              >GitHub</a
+            >
+            <a
+              href="https://www.linkedin.com/in/sergiogonzalezmu%C3%B1oz/"
+              target="_blank"
+              class="text-gray-300 hover:text-white font-medium"
+              >LinkedIn</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    
+  <!-- Main Content -->
+  <div class="h-[calc(100vh-4rem)] flex flex-col items-center justify-center px-4">
+    <div class="w-full max-w-2xl bg-surface rounded-xl shadow-lg p-10 border border-gray-700 text-center">
+      <h2 class="text-2xl font-bold text-white mb-4">¡Enhorabuena, has terminado!</h2>
+
+      <div class="text-gray-300 space-y-3 text-base mb-8">
+        <p><strong>Errores:</strong> <span id="finalErrors">0</span></p>
+        <p><strong>Total de caracteres:</strong> <span id="finalChars">0</span></p>
+        <p><strong>Tiempo:</strong> <span id="finalTime">00:00</span></p>
+        <p><strong>Palabras por minuto:</strong> <span id="finalWPM">0</span></p>
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="practice.html" class="bg-gray-700 hover:bg-gray-600 text-white font-semibold py-3 px-6 rounded-lg">Repetir práctica</a>
+        <a href="index.html" class="bg-accent hover:bg-accent/80  text-white font-semibold py-3 px-6 rounded-lg">Importar otro texto</a>
+      </div>
+    </div>
+  </div>
+  </body>
+</html>
