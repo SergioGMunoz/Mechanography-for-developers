@@ -16,5 +16,5 @@ Built with HTML, Tailwind CSS, and JavaScript
 ## Customization
 You can edit the Tailwind config in `js/tailwind-config.js` to change colors or styles.
 
-## License
+## About
 This project is for personal practice and learning. Feel free to use or modify it.
