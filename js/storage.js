@@ -1,18 +1,19 @@
-// Using the local storage 
+// Using the local storage
 
 export const uploadToStorage = (text) => {
   localStorage.clear();
-  localStorage.setItem('codeInput', text);
+  localStorage.setItem("codeInput", text);
 };
 
 export const loadFromStorage = () => {
-  return localStorage.getItem('codeInput');
+  return localStorage.getItem("codeInput");
 };
 
 export const uploadStats = (text) => {
-  localStorage.setItem('stats', text);
+  localStorage.removeItem("stats");
+  localStorage.setItem("stats", text);
 };
 
 export const loadStatsFromStorage = () => {
-  return localStorage.getItem('stats');
+  return JSON.parse(localStorage.getItem("stats"));
 };

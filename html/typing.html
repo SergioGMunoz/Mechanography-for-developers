@@ -7,11 +7,17 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="../js/tailwind-config.js"></script>
     <script type="module" src="../js/typing.js" defer></script>
-
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        overflow: hidden; /* Prevent scrolling */
+      }
+    </style>
   </head>
-  <body class="bg-background text-white font-mono overflow-hidden">
+  <body class="bg-background text-white font-mono flex flex-col h-full">
     <!-- Navbar -->
-    <nav class="bg-surface shadow-md">
+    <nav class="bg-surface shadow-md flex-none">
       <div class="max-w-7xl mx-auto px-4">
         <div class="flex justify-between items-center h-16 relative">
           <!-- Left: Home -->
@@ -31,41 +37,40 @@
       </div>
     </nav>
 
-   <!-- Typing Area -->
-<div class="h-screen flex flex-col items-center justify-center px-4">
-  <div
-    class="w-full max-w-5xl bg-surface rounded-2xl shadow-2xl p-12 border border-gray-700 flex flex-col"
-    style="height: 70vh;"
-  >
-    <div class="mb-6 text-center">
-      <h2 class="text-xl font-semibold text-gray-200">Typing Practice</h2>
-    </div>
-    <div
-    id="divText"
-      class="bg-black border border-gray-600 rounded-lg p-8 font-mono text-base text-gray overflow-auto flex-grow"
-      style="min-height: 400px;"
-    >
-    <p id="practiceText" class="">
-        <span id="textBefore"></span><span class="animate-blink inline-block">|</span><span
-            id="textAfter"></span>
-    </p>
-    </div>
+    <!-- Typing Area -->
+    <main class="flex-1 flex items-center justify-center px-4 py-6">
+      <div class="w-full max-w-5xl bg-surface rounded-2xl shadow-2xl border border-gray-700 flex flex-col p-8 h-full max-h-[80vh]">
+        
+        <!-- Title -->
+        <div class="mb-4 text-center flex-none">
+          <h2 class="text-xl font-semibold text-gray-200">Typing Practice</h2>
+        </div>
 
-    <!-- Stats Menu -->
-    <div
-      id="statsMenu"
-      class="mt-6 flex justify-around text-gray-300 text-sm font-mono  pt-4 select-none"
-    >
-      <div>
-        Errors: <span id="errorsCount">0</span>
-      </div>
-      <div>
-        Words / Minute: <span id="wpmCount">0</span>
-      </div>
-    </div>
-  </div>
-</div>
+        <!-- Black text area (flex-grow to fill available space) -->
+        <div
+          id="divText"
+          class="bg-black border border-gray-600 rounded-lg p-6 font-mono text-base text-gray-300 overflow-auto flex-grow"
+        >
+          <p id="practiceText">
+            <span id="textBefore"></span>
+            <span class="animate-blink inline-block">|</span>
+            <span id="textAfter"></span>
+          </p>
+        </div>
 
-    
+        <!-- Stats Menu -->
+        <div
+          id="statsMenu"
+          class="mt-4 flex justify-around text-gray-300 text-sm font-mono pt-2 select-none flex-none"
+        >
+          <div>
+            Errors: <span id="errorsCount">0</span>
+          </div>
+          <div>
+            Words / Minute: <span id="wpmCount">0</span>
+          </div>
+        </div>
+      </div>
+    </main>
   </body>
 </html>

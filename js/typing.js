@@ -2,12 +2,30 @@ import { loadFromStorage } from "./storage.js";
 
 const text = loadFromStorage();
 let cursor = 0;
-console.log(text.lengthren)
+console.log(text.length)
 
 // Load text from storage and validate
 if (!text || text.trim() === "") {
   alert("Text not found, try again");
   window.location.href = "../index.html";
+}
+
+// Stats element
+stats = {
+  totalCharacters: text.length,
+  errors: 0,
+  cps: '-',
+  seconds: 0,
+  uploadStats() {
+    if (this.startingDate) {
+      
+    }
+  }
+}
+
+// Load the stats into de UI
+const renderStats = () => {
+  
 }
 
 // Load the text into de UI
