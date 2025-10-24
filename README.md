@@ -13,9 +13,9 @@ Puedes pegar tu propio código o texto y mejorar tu velocidad y precisión.
 
 ## ⚡ Funcionalidades
 
-* 📝 Editor de código interactivo para práctica de mecanografía
-* ⏱️ Medición de velocidad y precisión
-* 💻 Soporte para cualquier lenguaje de programación
+*  Editor de código interactivo para práctica de mecanografía
+*  Medición de velocidad y precisión
+*  Soporte para cualquier lenguaje de programación
 
 
 ## 🚀 Cómo Probar
