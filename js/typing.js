@@ -1,4 +1,4 @@
-import { loadFromStorage } from "./storage.js";
+import { loadFromStorage, uploadStats } from "./storage.js";
 
 const text = loadFromStorage();
 let cursor = 0;
@@ -16,12 +16,32 @@ const stats = {
   errors: 0,
   correctCharacters: 0,
   startTime: null,
+  endTime: null,
   currentWPM: 0,
+  currentCPS: 0,
   
   startTimer() {
     if (!this.startTime) {
       this.startTime = Date.now();
+      console.log('Timer started at:', new Date(this.startTime));
     }
+  },
+  
+  finishTimer() {
+    this.endTime = Date.now();
+    console.log('Timer finished at:', new Date(this.endTime));
+  },
+  
+  getTotalTimeSeconds() {
+    if (!this.startTime || !this.endTime) return 0;
+    return (this.endTime - this.startTime) / 1000;
+  },
+  
+  getTotalTimeFormatted() {
+    const totalSeconds = this.getTotalTimeSeconds();
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = Math.floor(totalSeconds % 60);
+    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   },
   
   calculateWPM() {
@@ -33,12 +53,36 @@ const stats = {
     return this.currentWPM;
   },
   
+  calculateCPS() {
+    if (!this.startTime) return 0;
+    
+    const timeElapsed = (Date.now() - this.startTime) / 1000; // seconds
+    this.currentCPS = timeElapsed > 0 ? Math.round(this.correctCharacters / timeElapsed) : 0;
+    return this.currentCPS;
+  },
+  
   addError() {
     this.errors++;
   },
   
   addCorrectChar() {
     this.correctCharacters++;
+  },
+  
+  saveToStorage() {
+    const statsData = {
+      totalCharacters: this.totalCharacters,
+      errors: this.errors,
+      correctCharacters: this.correctCharacters,
+      totalTimeSeconds: this.getTotalTimeSeconds(),
+      totalTimeFormatted: this.getTotalTimeFormatted(),
+      finalWPM: this.calculateWPM(),
+      finalCPS: this.calculateCPS(),
+      accuracy: this.totalCharacters > 0 ? Math.round((this.correctCharacters / this.totalCharacters) * 100) : 0
+    };
+    
+    console.log('Saving stats to storage:', statsData);
+    uploadStats(JSON.stringify(statsData));
   }
 }
 
@@ -46,6 +90,8 @@ const stats = {
 const renderStats = () => {
   const errorsElement = document.getElementById('errorsCount');
   const wpmElement = document.getElementById('wpmCount');
+  const progressElement = document.getElementById('progressCount');
+  const accuracyElement = document.getElementById('accuracyCount');
   
   if (errorsElement) {
     errorsElement.textContent = stats.errors;
@@ -54,6 +100,19 @@ const renderStats = () => {
   if (wpmElement) {
     wpmElement.textContent = stats.calculateWPM();
   }
+  
+  if (progressElement) {
+    progressElement.textContent = `${cursor}/${stats.totalCharacters}`;
+  }
+  
+  if (accuracyElement) {
+    const totalTyped = stats.correctCharacters + stats.errors;
+    const accuracy = totalTyped > 0 ? Math.round((stats.correctCharacters / totalTyped) * 100) : 100;
+    accuracyElement.textContent = `${accuracy}%`;
+  }
+  
+  // Log current stats for debugging
+  console.log(`Stats - WPM: ${stats.calculateWPM()}, CPS: ${stats.calculateCPS()}, Errors: ${stats.errors}, Progress: ${cursor}/${stats.totalCharacters}`);
 }
 
 // Load the text into de UI
@@ -76,7 +135,10 @@ const checkChar = (char) => {
 }
 
 // Go to the finished page
-const finish = () =>{
+const finish = () => {
+  stats.finishTimer();
+  stats.saveToStorage();
+  console.log('Practice finished! Redirecting to results page...');
   window.location.href = './finished.html';
 }
 
@@ -147,9 +209,9 @@ renderText();
 renderStats();
 changeBgColor(true);
 
-// Update stats every second for real-time WPM calculation
+// Update stats every 500ms for smooth real-time updates
 setInterval(() => {
-  if (stats.startTime) {
+  if (stats.startTime && cursor < stats.totalCharacters) {
     renderStats();
   }
-}, 1000);
+}, 500);

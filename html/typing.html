@@ -57,13 +57,23 @@
         <!-- Stats Menu -->
         <div
           id="statsMenu"
-          class="mt-4 flex justify-around text-gray-300 text-sm font-mono pt-2 select-none flex-none"
+          class="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4 text-gray-300 text-sm font-mono pt-2 select-none flex-none"
         >
-          <div>
-            Errors: <span id="errorsCount">0</span>
+          <div class="text-center">
+            <div class="text-xs text-gray-500">Errors</div>
+            <div class="text-lg text-red-400"><span id="errorsCount">0</span></div>
           </div>
-          <div>
-            Words / Minute: <span id="wpmCount">0</span>
+          <div class="text-center">
+            <div class="text-xs text-gray-500">WPM</div>
+            <div class="text-lg text-green-400"><span id="wpmCount">0</span></div>
+          </div>
+          <div class="text-center">
+            <div class="text-xs text-gray-500">Progress</div>
+            <div class="text-lg text-blue-400"><span id="progressCount">0/0</span></div>
+          </div>
+          <div class="text-center">
+            <div class="text-xs text-gray-500">Accuracy</div>
+            <div class="text-lg text-yellow-400"><span id="accuracyCount">100%</span></div>
           </div>
         </div>
       </div>
