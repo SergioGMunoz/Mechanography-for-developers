@@ -22,7 +22,7 @@
         <div class="flex justify-between items-center h-16 relative">
           <!-- Left: Home -->
           <div class="absolute left-0">
-            <a href="index.html" class="text-sm text-gray-300 hover:text-white font-medium">Home</a>
+            <a href="../index.html" class="text-sm text-gray-300 hover:text-white font-medium">Home</a>
           </div>
           <!-- Center: Title -->
           <div class="mx-auto">
@@ -51,23 +51,29 @@
           id="divText"
           class="bg-black border border-gray-600 rounded-lg p-6 font-mono text-base text-gray-300 overflow-auto flex-grow"
         >
-          <p id="practiceText">
-            <span id="textBefore"></span>
-            <span class="animate-blink inline-block">|</span>
-            <span id="textAfter"></span>
-          </p>
+          <pre id="practiceText" class="whitespace-pre-wrap"><span id="textBefore"></span><span class="animate-blink inline-block">|</span><span id="textAfter"></span></pre>
         </div>
 
         <!-- Stats Menu -->
         <div
           id="statsMenu"
-          class="mt-4 flex justify-around text-gray-300 text-sm font-mono pt-2 select-none flex-none"
+          class="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4 text-gray-300 text-sm font-mono pt-2 select-none flex-none"
         >
-          <div>
-            Errors: <span id="errorsCount">0</span>
+          <div class="text-center">
+            <div class="text-xs text-gray-500">Errors</div>
+            <div class="text-lg text-red-400"><span id="errorsCount">0</span></div>
           </div>
-          <div>
-            Words / Minute: <span id="wpmCount">0</span>
+          <div class="text-center">
+            <div class="text-xs text-gray-500">WPM</div>
+            <div class="text-lg text-green-400"><span id="wpmCount">0</span></div>
+          </div>
+          <div class="text-center">
+            <div class="text-xs text-gray-500">Progress</div>
+            <div class="text-lg text-blue-400"><span id="progressCount">0/0</span></div>
+          </div>
+          <div class="text-center">
+            <div class="text-xs text-gray-500">Accuracy</div>
+            <div class="text-lg text-yellow-400"><span id="accuracyCount">100%</span></div>
           </div>
         </div>
       </div>

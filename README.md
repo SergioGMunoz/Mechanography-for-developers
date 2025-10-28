@@ -1,7 +1,5 @@
 # ⌨️ Mechanography para Desarrolladores
 
-> 🚧 **En desarrollo:** esta aplicación aún se encuentra en fase de pruebas y mejora.
-
 Practica mecanografía con código de cualquier lenguaje de programación en una aplicación web orientada a desarrolladores.
 Puedes pegar tu propio código o texto y mejorar tu velocidad y precisión.
 
