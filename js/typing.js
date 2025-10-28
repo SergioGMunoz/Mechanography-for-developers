@@ -11,21 +11,49 @@ if (!text || text.trim() === "") {
 }
 
 // Stats element
-stats = {
+const stats = {
   totalCharacters: text.length,
   errors: 0,
-  cps: '-',
-  seconds: 0,
-  uploadStats() {
-    if (this.startingDate) {
-      
+  correctCharacters: 0,
+  startTime: null,
+  currentWPM: 0,
+  
+  startTimer() {
+    if (!this.startTime) {
+      this.startTime = Date.now();
     }
+  },
+  
+  calculateWPM() {
+    if (!this.startTime) return 0;
+    
+    const timeElapsed = (Date.now() - this.startTime) / 1000 / 60; // minutes
+    const wordsTyped = this.correctCharacters / 5; // standard: 5 characters = 1 word
+    this.currentWPM = timeElapsed > 0 ? Math.round(wordsTyped / timeElapsed) : 0;
+    return this.currentWPM;
+  },
+  
+  addError() {
+    this.errors++;
+  },
+  
+  addCorrectChar() {
+    this.correctCharacters++;
   }
 }
 
 // Load the stats into de UI
 const renderStats = () => {
+  const errorsElement = document.getElementById('errorsCount');
+  const wpmElement = document.getElementById('wpmCount');
   
+  if (errorsElement) {
+    errorsElement.textContent = stats.errors;
+  }
+  
+  if (wpmElement) {
+    wpmElement.textContent = stats.calculateWPM();
+  }
 }
 
 // Load the text into de UI
@@ -33,12 +61,17 @@ const renderText = () => {
   const textBefore = text.substring(0, cursor);
   const textAfter = text.substring(cursor);
 
-  document.getElementById("textBefore").innerHTML = textBefore;
-  document.getElementById("textAfter").innerHTML = textAfter;
+  // Use textContent to preserve formatting and prevent XSS
+  document.getElementById("textBefore").textContent = textBefore;
+  document.getElementById("textAfter").textContent = textAfter;
 };
 
 // Returns if is the correct character
 const checkChar = (char) => {
+    // Handle Enter key as line break
+    if (char === 'Enter') {
+        return text[cursor] === '\n';
+    }
     return char === text[cursor];
 }
 
@@ -48,12 +81,10 @@ const finish = () =>{
 }
 
 // Errors management
-let errors = 0;
-const errorsCount = document.getElementById('errorsCount');
-
 const error = () => {
     changeBgColor(false);
-    errors++;
+    stats.addError();
+    renderStats();
 }
 
 const changeBgColor = (succeed) => {
@@ -67,13 +98,13 @@ const changeBgColor = (succeed) => {
   }
 };
 
-const renderErrors = () => errorsCount.innerHTML = errors;
-
 // Succeed management
 const succeed = () => {
   changeBgColor(true);
+  stats.addCorrectChar();
   cursor++;
   renderText();
+  renderStats();
   
   // Finished the text
   if (cursor === text.length){
@@ -87,19 +118,38 @@ document.addEventListener("keydown", (event) => {
   const char = event.key;
   console.log('key pressed: ' + char)
 
-  // Ignore special keys like Shift, Control, etc.
+  // Start timer on first keystroke
+  stats.startTimer();
+
+  // Handle Enter key specifically
+  if (char === 'Enter') {
+    if (checkChar(char)) {
+      succeed();
+    } else {
+      error();
+    }
+    return;
+  }
+
+  // Ignore other special keys like Shift, Control, etc.
   if (char.length !== 1) return;
 
   if (checkChar(char)) {
     succeed();
   } else {
     error();
-    renderErrors();
   }
 });
 
 
 // Render all
 renderText();
-renderErrors();
+renderStats();
 changeBgColor(true);
+
+// Update stats every second for real-time WPM calculation
+setInterval(() => {
+  if (stats.startTime) {
+    renderStats();
+  }
+}, 1000);
